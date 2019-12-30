@@ -1,0 +1,4 @@
+Python
+Tkinter
+BeautifulSoup
+And Internet Connection

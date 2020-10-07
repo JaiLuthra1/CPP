@@ -10,18 +10,19 @@ pagescount=1
 f = open("rank.csv", "w")
 f.truncate()
 f.close()
-# ids=int(input("Contest Id : \n"))
-ids = sys.argv[1]
-ti1 = time.time()
+# contest_id=int(input("Contest Id : \n"))
+contest_id = sys.argv[1]
+start_time = time.time()
+
 while(pagescount>=0):
-    url = "https://codeforces.com/contest/+"+str(ids)+"/standings/page/"+str(pagescount)
+    url = "https://codeforces.com/contest/+"+str(contest_id)+"/standings/page/"+str(pagescount)
     page = urllib.request.urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
 
     regex1 = re.compile('contestant-cell')
     content_lis = soup.find_all('td', attrs={'class': regex1})
 
-    rks = soup.find_all('tr')
+    ranks = soup.find_all('tr')
     # rnk_lis = soup.find_all('tr', attrs={'participantId': regex2})
 
     sd=[]
@@ -57,7 +58,7 @@ while(pagescount>=0):
     olusern = checkusern
 
     sy=""
-    for i in rks:
+    for i in ranks:
         sy+=str(i)+" "
 
     rnk_list = []
@@ -94,5 +95,6 @@ while(pagescount>=0):
 
     pagescount+=1  
 
-t2=time.time();print("Time Elapsed -> "+str(int(t2-ti1))+"sec")
-os.system("python3 finaldo.py")
+t2=time.time();print("Time Elapsed -> "+str(int(t2-start_time))+"sec")
+
+os.system("python3 find_ranks.py")
